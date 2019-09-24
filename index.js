@@ -3,29 +3,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require("request");
 const fs = require('fs');
-const channel = "#pizzaservice";
+const channel = "#general";
 var menu_el;
-var menu_file = fs.readFile(__dirname + "/menu.txt", "utf8", function(err, data){
-   menu_el = data.split(';');
-});
-
 const app = express();
 const port = 3000;
-
 app.listen(process.env.port || port, function() {
    console.log('Bot is listening on port ' + port);
 });
-
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.post('/test', (req, res) => {
-   var data = {form: {
-      token: process.env.SLACK_AUTH_TOKEN,
-      channel: channel,
-      text: "Hi! :wave: What is your name?"
-    }};
-    post_req(data, req, res);
-});
 app.post('/hpme', function(req, res){
    var help_file = fs.readFileSync(__dirname + "/help.txt");
    var data = {form: {
@@ -36,32 +22,32 @@ app.post('/hpme', function(req, res){
    post_req(data, req, res);
 });
 app.post('/menu', function(req, res){
-   message = {
-      response_type: 'in_channel',
-      blocks: [   
-      {
-         "type": "section",
-         "text": {
-            "type": "mrkdwn",
-            "text": "*Menu*"
+   var menu_file = fs.readFile(__dirname + "/menu.txt", "utf8", function(err, data){
+      menu_el = data.split(';');
+      message = {
+         response_type: 'in_channel',
+         blocks: [   
+         {
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*Menu*"
+            }
          }
-      },
-      {
-         "type": "divider"
+      ]};
+      for(i = 0; i < menu_el.length-1; i++){
+         var property = menu_el[i].split('.');
+         message.blocks.push({
+            "type": "section",
+            "text": {
+               "type": "mrkdwn",
+               "text": "*" +property[0] + "*\nStructure:" + property[1]
+            }
+         });
+         message.blocks.push({"type": "divider"});
       }
-   ]};
-   for(i = 0; i < menu_el.length-1; i++){
-      var property = menu_el[i].split('.');
-      message.blocks.push({
-         "type": "section",
-         "text": {
-            "type": "mrkdwn",
-            "text": "*" +property[0] + "*\nStructure:" + property[1]
-         }
-      });
-      message.blocks.push({"type": "divider"});
-   }
-   res.json(message);
+      res.json(message);
+   });
 });
 app.post('/order', function(req, res){
    const order = req.body.text;
