@@ -1,0 +1,6 @@
+/test - u will see my test message :)\n
+/menu - i will give u our pizza menu
+/order - make ur own order by following info {
+   /order name of pizza, pizza size(inch.), delivery adress, disires
+   Example: /order Trump, 12, Tomsk Litkina 12 236
+}
