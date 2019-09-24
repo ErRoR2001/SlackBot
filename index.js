@@ -96,9 +96,3 @@ function post_req(data, req, res){
       res.json();
    });
 };
-
-app.get('/nprlrbyabizejkcvtyxa', function(req, res){
-   var page = fs.readFile(__dirname + '/index.html', function(err, data){
-      res.send("eeeea");
-   });
-});
