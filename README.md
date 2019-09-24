@@ -12,3 +12,4 @@ I created: index.js - core of this project(This file processes posted url),
   help.txt - Keep bot-commands with description & examples.
 U can use following commands: /hpme - help, /menu - show Pizza-menu, /order - make order.
 Bot can save ur order in order.txt .
+I special didn't add .env, u know why.
