@@ -7,15 +7,8 @@ It is simple lib)
 Also i use fs, express,body-parser.
 I thought slash-commands is the best method for this task.(Just bind url in slack. Server waiting for necessary urls and 
 communicate with slack api).
-I created{\n
-  index.js - core of this project(This file processes posted url),
-  order.txt - Keep orders,
-  menu.txt - Keep Pizza-menu with short description,
-  help.txt - Keep bot-commands with description & examples
-}
-U can use following commands{
-  /hpme - help,
-  /menu - show Pizza-menu,
-  /order - make order
-}
-Bot can save ur order in order.txt
+I created: index.js - core of this project(This file processes posted url),
+  order.txt - Keep orders, menu.txt - Keep Pizza-menu with short description, 
+  help.txt - Keep bot-commands with description & examples.
+U can use following commands: /hpme - help, /menu - show Pizza-menu, /order - make order.
+Bot can save ur order in order.txt .
